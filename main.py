@@ -2,7 +2,7 @@
 from pyscript import document
 
 
-def translate_english(event,event2):
+def translate_english(event):
     input_text = document.querySelector("#zn1")
     input_text2 = document.querySelector("#zn2")
     zn1 = input_text.value
