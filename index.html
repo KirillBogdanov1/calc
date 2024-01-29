@@ -10,7 +10,17 @@
 
 <body>
    
-   <div id="regform2"> <canvas id="myChart" ></canvas> </div>
+
+    <table id="zZ" style="float: right ">
+
+      <TH >Температура наружного воздуха</TH> 
+      <TH >Температура в подающем тр-де</TH> 
+      <TH >Температура  в обратном тр-де</TH> 
+      <TH >Относительная тепловая нагрузка</TH> 
+    </table>
+
+    <table id="z" style="float: right">
+    </table>
   
 	<!-- поля ввода чисел -->
 
@@ -50,34 +60,10 @@
    <p><input  name="submitt" value="" id="num7" disabled></p>
 
  </form>
-
+    <button style="float: left"onclick="func()">Расчет температурного графика</button>
     </div>
   </div>
-
-	<!-- блок с кнопками -->
-
-	<br>
-
-	<!-- кнопка для расчётов -->
-	<button onclick="func()">Расчет температурного графика</button>
-
-	<!-- здесь будет результат -->
-	<p id="result"></p>
-    <p id="result2"></p>
-    <p id="result3"></p>
-    <p id="result4"></p>
-
-    <table id="zZ">
-
-      <TH >Температура наружного воздуха</TH> 
-      <TH >Температура в подающем тр-де</TH> 
-      <TH >Температура  в обратном тр-де</TH> 
-      <TH >Относительная тепловая нагрузка</TH> 
-    </table>
-
-    <table id="z">
-    </table>
-
+   <div class="outer" id="regform2"> <canvas id="myChart"  ></canvas> </div>
 	<script>
           
 	  // переменная, в которой хранится выбранное математическое действие
@@ -212,14 +198,14 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
                 data: t1c,
                 backgroundColor: 'rgba(255, 0, 0, 0.2)',
                 borderColor: 'rgba(255, 0, 0, 1)',
-                borderWidth: 1,
+                borderWidth: 0.5,
               },
               {
                 label: 'Температура сетевой воды в обратном трубопроводе',
                 data: t2c,
                 backgroundColor: 'rgba(0, 0, 255, 0.2)',
                 borderColor: 'rgba(0, 0, 255, 1)',
-                borderWidth: 1,
+                borderWidth: 0.5,
               },
             ],
           },
@@ -247,3 +233,4 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
 
 </body>
 </html>
+
