@@ -9,18 +9,9 @@
 </head>
 
 <body>
-   
+   <div class="outer" id="regform2" style="float: right"> <canvas id="myChart"  ></canvas> </div>   
 
-    <table id="zZ" style="float: right ">
 
-      <TH >Температура наружного воздуха</TH> 
-      <TH >Температура в подающем тр-де</TH> 
-      <TH >Температура  в обратном тр-де</TH> 
-      <TH >Относительная тепловая нагрузка</TH> 
-    </table>
-
-    <table id="z" style="float: right">
-    </table>
   
 	<!-- поля ввода чисел -->
 
@@ -63,7 +54,18 @@
     <button style="float: left"onclick="func()">Расчет температурного графика</button>
     </div>
   </div>
-   <div class="outer" id="regform2"> <canvas id="myChart"  ></canvas> </div>
+  <div class="mann">
+    <table id="zZ" style="float: left">
+
+      <TH >Температура наружного воздуха</TH> 
+      <TH >Температура в подающем тр-де</TH> 
+      <TH >Температура  в обратном тр-де</TH> 
+      <TH >Относительная тепловая нагрузка</TH> 
+    </table>
+
+  <table id="z" style="float: left">
+  </table>
+     </div>
 	<script>
           
 	  // переменная, в которой хранится выбранное математическое действие
@@ -233,4 +235,3 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
 
 </body>
 </html>
-
