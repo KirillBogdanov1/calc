@@ -6,6 +6,7 @@ input {
   text-align:center;
 
 
+
   
 }
 button {
@@ -56,4 +57,12 @@ table {
 th, td {
    padding: 10px 15px;
    width:200px;
+   
 }
+div.outer{
+            width: 800px;
+            height: 400px;
+            margin: 0;
+            padding: 0;
+
+        }
