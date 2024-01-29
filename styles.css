@@ -1,4 +1,4 @@
-input {
+ input {
   width: 40%;
   padding: 5px 1px;
   margin: 1px 5;
@@ -60,6 +60,13 @@ th, td {
    
 }
 div.outer{
+            width: 1500px;
+            height: 550px;
+            margin: 0;
+            padding: 0;
+
+        }
+div.mann{
             width: 800px;
             height: 400px;
             margin: 0;
