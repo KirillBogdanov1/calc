@@ -1,87 +1,249 @@
 <!DOCTYPE html>
-<html><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>ZuluWebCalc</title>
+<html lang="ru">
+<head
+    <script src="compiled.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+	<meta charset="utf-8">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
-<link href="compiled.min.css" type="text/css" rel="stylesheet">
-<script src="compiled.min.js" type="text/javascript"></script>
+<body>
+   
+   <div id="regform2"> <canvas id="myChart" ></canvas> </div>
+  
+	<!-- поля ввода чисел -->
 
-<script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
-<body class="fillscreen">
+  <div class="main">
+    <div class="field">
+    <span class="input-group-addon">Температура наружного воздуха :</span>
+	<input id="tn" />
+    <p></p>
+    <span class="input-group-addon">Температура в подающем тр-де :</span>
+	<input id="tau1" />
+    <p></p>
+    <span class="input-group-addon">Температура на входе в СО :</span>
+	<input id="tau3" />
+    <p></p>
+    <span class="input-group-addon">Температура на выходе из СО :</span>
+	<input id="tau2" />
+    <p></p>
+    <span class="input-group-addon">Температура внутреннего воздуха :</span>
+	<input id="temp_vr" />
+    <p></p>
+    <span class="input-group-addon">Доля бытовых тепловыделений :</span>
+	<input id="num8" />
+    <p></p>
+    <span class="input-group-addon">Коэффициент нагрузки  :</span>
+	<input id="num9" />
 
-  <div class="fillscreen ng-scope" data-ng-app="ZuluWebCalcApp" data-ng-strict-di="">
-    <!-- uiView: --><div data-ui-view="" class="ng-scope"><z-t-g class="ng-scope ng-isolate-scope"><div class="calc-panel tg-calc-panel">
-  <div class="row">
-    <div id="input-values" class="col-xs-6">
-      <div>
-        <label for="editTn">Температура наружного воздуха</label>
-        <div class="input-group">
-          <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="editTn" data-ng-model="editTn" data-awnum="" data-num-fract="1"><span class="input-group-addon">°C</span>
-        </div>
-      </div>
-      <div>
-        <label for="editTpod">Температура в подающем тр-де</label>
-        <div class="input-group">
-          <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="editTpod" data-ng-model="editTpod" data-awnum="" data-num-fract="1"><span class="input-group-addon">°C</span>
-        </div>
-      </div>
-      <div>
-        <label for="editTso">Температура на входе в СО</label>
-        <div class="input-group">
-          <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="editTso" data-ng-model="editTso" data-awnum="" data-num-fract="1"><span class="input-group-addon">°C</span>
-        </div>
-      </div>
-      <div>
-        <label for="editTobr">Температура на выходе из СО</label>
-        <div class="input-group">
-          <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="editTobr" data-ng-model="editTobr" data-awnum="" data-num-fract="1"><span class="input-group-addon">°C</span>
-        </div>
-      </div>
-      <div>
-        <label for="editTv">Температура внутреннего воздуха</label>
-        <div class="input-group">
-          <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="editTv" data-ng-model="editTv" data-awnum="" data-num-fract="1"><span class="input-group-addon">°C</span>
-        </div>
-      </div>
-      <div>
-        <label><input type="checkbox" id="usePolka" data-ng-model="usePolka" class="ng-pristine ng-untouched ng-valid ng-not-empty">Температура полки</label>
-        <div class="input-group">
-          <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="editTPolka" data-ng-model="editTPolka" data-awnum="" data-num-fract="1" data-ng-disabled="!usePolka"><span class="input-group-addon">°C</span>
-        </div>
-      </div>
-      <div>
-        <label><input type="checkbox" id="useSrezka" data-ng-model="useSrezka" class="ng-pristine ng-untouched ng-valid ng-not-empty">Температура срезки</label>
-        <div class="input-group">
-          <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="editTSrezka" data-ng-model="editTSrezka" data-awnum="" data-num-fract="1" data-ng-disabled="!useSrezka"><span class="input-group-addon">°C</span>
-        </div>
-      </div>
-      <div class="col-xs-12" style="height: 50px;"></div>
-      <button type="button" class="btn btn-primary col-xs-12" data-ng-click="doCalc()">Расчёт</button>
+
+<form>
+    <p></p>
+    <span class="input-group-addon">Учитывать срезку и излом</span>
+   <p><input type="checkbox" name="agree" onclick="agreeForm(this.form)"> 
+    <p></p>
+    <span class="input-group-addon">Температура срезки :</span>
+   <p><input  name="submit" value="" id="num6" disabled></p>
+   <p></p>
+   <span class="input-group-addon">Температура излома :</span>
+   <p><input  name="submitt" value="" id="num7" disabled></p>
+
+ </form>
+
     </div>
-      <canvas id="graph" class="graphcanvas col-xs-6"></canvas>
-  </div>
-  <div id="result-table" class="col-xs-12">
-  <table class="table ng-hide" data-ng-show="showTable">
-    <thead>
-    <tr>
-      <th>Tn</th>
-      <th>T1</th>
-      <th>T3</th>
-      <th>T2</th>
-      <th>Qot</th>
-      <th>Tv</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- ngRepeat: row in table -->
-    </tbody>
-  </table>
-  </div>
-</div></z-t-g></div>
-  </div>
-  <div class="gplay-link">
-    <a target="_blank" href="https://play.google.com/store/apps/details?id=ru.com.politerm.zulucalc&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"><img alt="Доступно в Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/ru_badge_web_generic.png"></a>
   </div>
 
-</body></html>
+	<!-- блок с кнопками -->
+
+	<br>
+
+	<!-- кнопка для расчётов -->
+	<button onclick="func()">Расчет температурного графика</button>
+
+	<!-- здесь будет результат -->
+	<p id="result"></p>
+    <p id="result2"></p>
+    <p id="result3"></p>
+    <p id="result4"></p>
+
+    <table id="zZ">
+
+      <TH >Температура наружного воздуха</TH> 
+      <TH >Температура в подающем тр-де</TH> 
+      <TH >Температура  в обратном тр-де</TH> 
+      <TH >Относительная тепловая нагрузка</TH> 
+    </table>
+
+    <table id="z">
+    </table>
+
+	<script>
+          
+	  // переменная, в которой хранится выбранное математическое действие
+	    var op; 
+        function agreeForm(f) {
+    // Если поставлен флажок, снимаем блокирование кнопки
+         if (f.agree.checked){ f.submit.disabled = 0;
+                          f.submitt.disabled = 0;
+    }
+    // В противном случае вновь блокируем кнопку
+         else {f.submit.disabled = 1;
+          f.submitt.disabled = 1;f.submit.value = '',f.submitt.value = ''
+         }
+        }  
+               
+	  // функция расчёта
+	    function func() {
+        const parentElement = document.getElementById('z');
+        parentElement.innerHTML = '';
+document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>';
+
+	  	// переменная для результата
+	    var result;
+        var result2;
+        var result3;
+        var result4;
+	    // получаем первое и второе число
+	    var tn = Number(document.getElementById("tn").value);
+	    var tau1 = Number(document.getElementById("tau1").value);
+        var tau3 = Number(document.getElementById("tau3").value);
+        var tau2 = Number(document.getElementById("tau2").value);
+        var temp_vr = Number(document.getElementById("temp_vr").value);
+        var num6 = Number(document.getElementById("num6").value);
+        var num7 = Number(document.getElementById("num7").value);
+        var num8 = Number(document.getElementById("num8").value);
+        var num9 = Number(document.getElementById("num9").value);
+        var tnn;
+        var row;
+        var td1;
+        var td2;
+        var td3;
+        var td4;
+	    // смотрим, что было в переменной с действием, и действуем исходя из этого
+
+        let tnc = [];
+        let t1c = [];
+        let t2c = [];
+        let Qc = [];
+  
+        for (tnn=tn; tnn < 9; tnn++) {
+  // Запускается 5 раз, с шагом от 0 до 4.
+          if (num8=="") {num8 = 0
+          }
+          else {num8 = num8
+               }
+          if (num9=="") {num9 = 0
+          }
+          else {num9 = num9
+               }
+        
+          Q=((1+num8)*(temp_vr-tnn)/(temp_vr-tn)-num8)*num9
+          per_v_s_o=tau3-tau2;    
+          per_v_t_s=tau1-tau2;   
+          b=per_v_t_s-per_v_s_o/2;
+          a=(tau3+tau2)/2-temp_vr;  
+	      t1=20+a*(Q)**0.8+b*Q;
+
+  // Срезка и излом
+          
+          if (num6 == "") {
+            if (num7 == "") {
+              t2=t1-per_v_t_s*Q;
+            } 
+            else if (t1>num7) {t2=t1-per_v_t_s*Q;
+            }
+            else if (t1=num7) {t2=t1-per_v_t_s*Q;t1 = num7 ;t22=t2;
+            }
+            else {t22=t2;
+            }
+          } 
+          else if (t1>=num6) {          
+            if (num7 == "") {
+              t2=t1-per_v_t_s*Q;t1 = num6
+            } 
+            else {t2=t1-per_v_t_s*Q;t1 = num6
+            }
+          }
+          else {         
+            if (num6 == "") {
+              t2=t1-per_v_t_s*Q;
+            } 
+            else if (t1>num7) {t2=t1-per_v_t_s*Q;
+            }
+            else if (t1=num7) {t2=t1-per_v_t_s*Q;t1 = num7 ;t22=t2;
+            }
+            else {t22=t2;
+            }
+          }
+
+          tnc.push(tnn);
+          t1c.push(t1);
+          t2c.push(t2);
+          Qc.push(Q);
+          
+          row = document.createElement("TR");
+          td1 = document.createElement("TD");
+          td2 = document.createElement("TD");
+          td3 = document.createElement("TD");
+          td4 = document.createElement("TD");
+          td1.textContent = tnn.toFixed(2);
+          td2.textContent = t1.toFixed(2);
+          td3.textContent = t2.toFixed(2);
+          td4.textContent = Q.toFixed(2);
+
+            
+          row.append(td1, td2,td3, td4);
+          document.getElementById("z").appendChild(row);  
+	    }
+
+	    // отправляем результат на страницу
+             
+        var ctx = document.getElementById('myChart').getContext('2d');
+          
+        var myChart = new Chart(ctx, {
+          
+          type: 'line',
+          data: {
+            labels: tnc,
+            datasets: [
+              {
+                label: 'Температура сетевой воды в подающем трубопроводе',
+                data: t1c,
+                backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                borderColor: 'rgba(255, 0, 0, 1)',
+                borderWidth: 1,
+              },
+              {
+                label: 'Температура сетевой воды в обратном трубопроводе',
+                data: t2c,
+                backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                borderColor: 'rgba(0, 0, 255, 1)',
+                borderWidth: 1,
+              },
+            ],
+          },
+      options: {
+        animation: {
+          duration: 2000,
+          easing: 'easeInOutBounce',
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
+      
+    }); 
+
+	}
+
+    </script>
+
+</body>
+</html>
