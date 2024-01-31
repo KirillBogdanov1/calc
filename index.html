@@ -4,15 +4,37 @@
     <script src="compiled.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 	<meta charset="utf-8">
+
     
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Калькулятор</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 </head>
 
 <body>
+
+   <input type="text" id="zn1" style="display: none;"/>
+    
+   <input type="text" id="zn2" style="display: none;" placeholder="b" />
+
+
+   <div id="output1" style="display: none;"></div>
+   <script type="py" src="./Newfile.py" config="./pyscript.json"></script> 
+    <div id="output2" style="display: none;" ></div>
+    <div id="output3" style="display: none;"></div>
+
+     <div id="output4" style="display: none;" ></div>
+     <div id="output5" style="display: none;"></div>  
+     <div id="output6" style="display: none;"></div>  
+  
+   
+    
    <div class="outer" id="regform2" style="float: right"> <canvas id="myChart"  ></canvas> </div>   
 
-
-  
 	<!-- поля ввода чисел -->
 
   <div class="main">
@@ -33,10 +55,10 @@
 	<input value="20"id="temp_vr" />
     <p></p>
     <span class="input-group-addon">Доля бытовых тепловыделений :</span>
-	<input value="0.1" id="num8" />
+	<input value="" id="num8" />
     <p></p>
     <span class="input-group-addon">Коэффициент нагрузки  :</span>
-	<input value="0.7" id="num9" />
+	<input value="" id="num9" />
 
 
 <form>
@@ -45,13 +67,23 @@
    <p><input type="checkbox" name="agree" onclick="agreeForm(this.form)"> 
     <p></p>
     <span class="input-group-addon">Температура срезки :</span>
-   <p><input  name="submit" value="" id="num6" disabled></p>
+   <p><input  name="submit" value="100" id="num6" disabled></p>
    <p></p>
    <span class="input-group-addon">Температура излома :</span>
-   <p><input  name="submitt" value="" id="num7" disabled></p>
+   <p><input  name="submitt" value="70" id="num7" disabled></p>
 
  </form>
+    <div id="result1" style="display: none;"></div>
+    <div id="result2" style="display: none;"></div>
+    <div id="result3" style="display: none;"></div>
+    <div  id="result4" style="display: none;"></div>
+    <div  id="result5" style="display: none;"></div>
+    <div  id="result6" style="display: none;"></div>
+    <div  id="result7" style="display: none;"></div>
+    <div  id="result8" style="display: none;"></div>
+    <button py-click="translate_english">Импорт таблицы </button>
     <button style="float: left"onclick="func()">Расчет температурного графика</button>
+   
     </div>
   </div>
   <div class="mann">
@@ -87,12 +119,52 @@
         parentElement.innerHTML = '';
 document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>';
 
-	  	// переменная для результата
-	    var result;
-        var result2;
-        var result3;
-        var result4;
-	    // получаем первое и второе число
+        var e1 = document.getElementById("output1");
+        var txt1 = e1.textContent || e1.innerText;
+        txtt1 =  txt1.replace("[", '');
+        txttt1 =  txtt1.replace("]", ''); 
+        var tnfact = txttt1.split(', ');
+        document.getElementById("result1").innerHTML = tnfact; 
+
+
+        var e2 = document.getElementById("output2");
+        var txt2 = e2.textContent || e2.innerText;
+        txtt2 =  txt2.replace("[", '');
+        txttt2 =  txtt2.replace("]", ''); 
+        var t1fact = txttt2.split(', ');
+        document.getElementById("result2").innerHTML = t1fact; 
+
+        var e3 = document.getElementById("output3");
+        var txt3 = e3.textContent || e3.innerText;
+        txtt3 =  txt3.replace("[", '');
+        txttt3 =  txtt3.replace("]", ''); 
+        var t2fact = txttt3.split(', ');
+        document.getElementById("result3").innerHTML = t2fact; 
+
+        var e4 = document.getElementById("output4");
+        var txt4 = e4.textContent || e4.innerText;
+        txtt4 =  txt4.replace("[", '');
+        txttt4 =  txtt4.replace("]", ''); 
+        var  t1factnew= txttt4.split(', ');
+        document.getElementById("result4").innerHTML = t1factnew; 
+
+        var e5 = document.getElementById("output5");
+        var txt5 = e5.textContent || e5.innerText;
+        txtt5 =  txt5.replace("[", '');
+        txttt5 =  txtt5.replace("]", ''); 
+        var tnfactnew = txttt5.split(', ');
+        document.getElementById("result5").innerHTML = tnfactnew; 
+
+        var e6 = document.getElementById("output6");
+        var txt6 = e6.textContent || e6.innerText;
+        txtt6 =  txt6.replace("[", '');
+        txttt6 =  txtt6.replace("]", ''); 
+        var  t2factnew= txttt6.split(', ');
+        document.getElementById("result8").innerHTML = t2factnew; 
+
+            
+	    var t1FACT = Number(document.getElementById("output1").value);
+	    var t2FACT = Number(document.getElementById("output2").value);
 	    var tn = Number(document.getElementById("tn").value);
 	    var tau1 = Number(document.getElementById("tau1").value);
         var tau3 = Number(document.getElementById("tau3").value);
@@ -102,21 +174,85 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
         var num7 = Number(document.getElementById("num7").value);
         var num8 = Number(document.getElementById("num8").value);
         var num9 = Number(document.getElementById("num9").value);
-        var tnn;
+
         var row;
         var td1;
         var td2;
         var td3;
         var td4;
-	    // смотрим, что было в переменной с действием, и действуем исходя из этого
+
 
         let tnc = [];
         let t1c = [];
         let t2c = [];
         let Qc = [];
+        let tncall = [];
+        var tnn = tnfactnew;
+        let len = tnn.length;
+        document.getElementById("result7").innerHTML = tnfactnew;
+
+            
+        for (let i = 0; i < len; i++) {
+  // Запускается расчет
+          if (num8=="") {num8 = 0
+          }
+          else {num8 = num8
+               }
+          if (num9=="") {num9 = 1
+          }
+          else {num9 = num9
+               }
+          
+          Q=((1+num8)*(temp_vr-tnn[i])/(temp_vr-tn)-num8)*num9
+          per_v_s_o=tau3-tau2;    
+          per_v_t_s=tau1-tau2;   
+          b=per_v_t_s-per_v_s_o/2;
+          a=(tau3+tau2)/2-temp_vr;  
+	      t1=20+a*(Q)**0.8+b*Q;
+          
+  // Срезка и излом
+          
+          if (num6 == "") {
+            if (num7 == "") {
+              t2=t1-per_v_t_s*Q;
+            } 
+            else if (t1>num7) {t2=t1-per_v_t_s*Q;
+            }
+            else if (t1=num7) {t2=t1-per_v_t_s*Q;t1 = num7 ;t22=t2;
+            }
+            else {t22=t2;
+            }
+          } 
+          else if (t1>=num6) {          
+            if (num7 == "") {
+              t2=t1-per_v_t_s*Q;t1 = num6
+            } 
+            else {t2=t1-per_v_t_s*Q;t1 = num6
+            }
+          }
+          else {         
+            if (num6 == "") {
+              t2=t1-per_v_t_s*Q;
+            } 
+            else if (t1>num7) {t2=t1-per_v_t_s*Q;
+            }
+            else if (t1=num7) {t2=t1-per_v_t_s*Q;t1 = num7 ;t22=t2;
+            }
+            else {t22=t2;
+            }
+          }
   
-        for (tnn=tn; tnn < 9; tnn++) {
-  // Запускается 5 раз, с шагом от 0 до 4.
+          tnc.push(tnn[i]);
+          t1c.push(t1);
+          
+          t2c.push(t2);
+          Qc.push(Q);
+          
+
+          
+	    }
+        for (tnn=tn; tnn < 21; tnn++) {
+  // Запускается расчет
           if (num8=="") {num8 = 0
           }
           else {num8 = num8
@@ -191,11 +327,12 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
           
         var myChart = new Chart(ctx, {
           
-          type: 'line',
+
           data: {
-            labels: tnc,
+            labels: tnfactnew,
             datasets: [
               {
+                type: 'line',   
                 label: 'Температура сетевой воды в подающем трубопроводе',
                 data: t1c,
                 backgroundColor: 'rgba(255, 0, 0, 0.2)',
@@ -203,13 +340,31 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
                 borderWidth: 0.5,
               },
               {
+                type: 'line',
                 label: 'Температура сетевой воды в обратном трубопроводе',
                 data: t2c,
                 backgroundColor: 'rgba(0, 0, 255, 0.2)',
                 borderColor: 'rgba(0, 0, 255, 1)',
                 borderWidth: 0.5,
               },
+              {
+                type: 'scatter',   
+                label: 'Температура сетевой воды в подающем трубопроводе',
+                data: t1factnew,
+                backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                borderColor: 'rgba(255, 0, 0, 1)',
+                borderWidth: 0.5,
+              },
+              {
+                type: 'scatter',
+                label: 'Температура сетевой воды в обратном трубопроводе',
+                data: t2factnew,
+                backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                borderColor: 'rgba(0, 0, 255, 1)',
+                borderWidth: 0.5,
+              },
             ],
+
           },
       options: {
         animation: {
@@ -226,6 +381,7 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
           ],
         },
       },
+
       
     }); 
 
