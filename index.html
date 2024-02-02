@@ -5,35 +5,29 @@
     <link rel="stylesheet" href="styles.css">
 	<meta charset="utf-8">
 
-    
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Калькулятор</title>
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
 </head>
 
 <body>
 
    <input type="text" id="zn1" style="display: none;"/>
-    
    <input type="text" id="zn2" style="display: none;" placeholder="b" />
 
-
    <div id="output1" style="display: none;"></div>
-   <script type="py" src="Newfile.py" config="./pyscript.json"></script> 
+   <script type="py" src="./Newfile.py" config="./pyscript.json"></script> 
     <div id="output2" style="display: none;" ></div>
     <div id="output3" style="display: none;"></div>
-
      <div id="output4" style="display: none;" ></div>
      <div id="output5" style="display: none;"></div>  
      <div id="output6" style="display: none;"></div>  
   
-   
-    
-   <div class="outer" id="regform2" style="float: right"> <canvas id="myChart"  ></canvas> </div>   
+   <div class="outer11" id="regform2" style="float: left"> <canvas id="myChart1"  ></canvas> </div> 
+   <div class="outer" id="regform" style="float: right"> <canvas id="myChart"  ></canvas> </div>  
 
 	<!-- поля ввода чисел -->
 
@@ -60,7 +54,6 @@
     <span class="input-group-addon">Коэффициент нагрузки  :</span>
 	<input value="" id="num9" />
 
-
 <form>
     <p></p>
     <span class="input-group-addon">Учитывать срезку и излом</span>
@@ -81,6 +74,8 @@
     <div  id="result6" style="display: none;"></div>
     <div  id="result7" style="display: none;"></div>
     <div  id="result8" style="display: none;"></div>
+    <div  id="result9" style="display: none;"></div>
+    <div  id="result10" style="display: none;"></div>
     <button py-click="translate_english">Импорт таблицы </button>
     <button style="float: left"onclick="func()">Расчет температурного графика</button>
    
@@ -94,7 +89,6 @@
       <TH >Температура  в обратном тр-де</TH> 
       <TH >Относительная тепловая нагрузка</TH> 
     </table>
-
   <table id="z" style="float: left">
   </table>
      </div>
@@ -111,21 +105,19 @@
          else {f.submit.disabled = 1;
           f.submitt.disabled = 1;f.submit.value = '',f.submitt.value = ''
          }
-        }  
-               
+        }                 
 	  // функция расчёта
 	    function func() {
         const parentElement = document.getElementById('z');
         parentElement.innerHTML = '';
-document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>';
-
+        document.getElementById('regform2').innerHTML='<canvas id="myChart1" "></canvas>';
+        document.getElementById('regform').innerHTML='<canvas id="myChart" "></canvas>';
         var e1 = document.getElementById("output1");
         var txt1 = e1.textContent || e1.innerText;
         txtt1 =  txt1.replace("[", '');
         txttt1 =  txtt1.replace("]", ''); 
         var tnfact = txttt1.split(', ');
         document.getElementById("result1").innerHTML = tnfact; 
-
 
         var e2 = document.getElementById("output2");
         var txt2 = e2.textContent || e2.innerText;
@@ -161,7 +153,6 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
         txttt6 =  txtt6.replace("]", ''); 
         var  t2factnew= txttt6.split(', ');
         document.getElementById("result8").innerHTML = t2factnew; 
-
             
 	    var t1FACT = Number(document.getElementById("output1").value);
 	    var t2FACT = Number(document.getElementById("output2").value);
@@ -181,7 +172,7 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
         var td3;
         var td4;
 
-
+        let Q2 = [];
         let tnc = [];
         let t1c = [];
         let t2c = [];
@@ -189,8 +180,27 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
         let tncall = [];
         var tnn = tnfactnew;
         let len = tnn.length;
-        document.getElementById("result7").innerHTML = tnfactnew;
 
+        let Q51 = [];
+        let Q52 = [];
+        let Q53 = [];
+        let Q54 = [];
+        let Q55 = [];
+        let Q56 = [];
+        let Q57 = [];
+
+        let Q511 = [];
+        let Q522 = [];
+        let Q533 = [];
+        let Q544 = [];
+        let Q555 = [];
+        let Q566 = [];
+        let Q577 = [];
+        let QQ1 = [];
+        let QQ2 = [];
+        let timeQ = [802,1903,1138,525,248,110,35];
+                 
+        document.getElementById("result7").innerHTML = tnfactnew;
             
         for (let i = 0; i < len; i++) {
   // Запускается расчет
@@ -209,9 +219,43 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
           b=per_v_t_s-per_v_s_o/2;
           a=(tau3+tau2)/2-temp_vr;  
 	      t1=20+a*(Q)**0.8+b*Q;
-          
+
+          Q22=((t1factnew[i]-tnn[i]-4.82-(44)/(1+num8)*num8)/(81.46+44/(1+num8)))*num9
   // Срезка и излом
-          
+            
+          if (tnn[i]>=5){
+            Q51.push(Q22);
+            Q511.push(Q);
+          }
+          else if (tnn[i]<5 & tnn[i]>=0){
+            Q52.push(Q22);
+            Q522.push(Q);
+          }
+          else if (tnn[i]<0 & tnn[i]>=-5){
+            Q53.push(Q22);
+            Q533.push(Q);
+          }
+          else if (tnn[i]<-5 & tnn[i]>=-10){
+            Q54.push(Q22);
+            Q544.push(Q);
+          }  
+          else if (tnn[i]<-10 & tnn[i]>=-15){
+            Q55.push(Q22);
+            Q555.push(Q);
+          }  
+          else if (tnn[i]<-15 & tnn[i]>-20){
+            Q56.push(Q22);
+            Q566.push(Q);
+          } 
+          else if (tnn[i]<=-20 ){
+            Q57.push(Q22);
+            Q577.push(Q);
+          } 
+          else {
+            Q57.push(Q22);
+            Q577.push(Q);
+          }
+              
           if (num6 == "") {
             if (num7 == "") {
               t2=t1-per_v_t_s*Q;
@@ -241,15 +285,122 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
             else {t22=t2;
             }
           }
-  
+          Q2.push(Q22)
           tnc.push(tnn[i]);
           t1c.push(t1);
-          
+
+          var sum = 0;
+          Q511.forEach(function(num) {
+              sum += num;
+          });
+          Q511sr=sum/Q511.length
+
+          var sum = 0;
+          Q51.forEach(function(num) {
+              sum += num;
+          });
+          Q51sr=sum/Q51.length
+            
+          var sum = 0;
+          Q52.forEach(function(num) {
+              sum += num;
+          });            
+          Q52sr=sum/Q52.length
+            
+          var sum = 0;
+          Q53.forEach(function(num) {
+              sum += num;
+          });
+          Q53sr=sum/Q53.length
+            
+          var sum = 0;
+          Q54.forEach(function(num) {
+              sum += num;
+          });
+          Q54sr=sum/Q54.length
+
+          var sum = 0;
+          Q55.forEach(function(num) {
+              sum += num;
+          });
+          Q55sr=sum/Q55.length
+
+          var sum = 0;
+          Q56.forEach(function(num) {
+              sum += num;
+          });
+          Q56sr=sum/Q56.length
+
+          var sum = 0;
+          Q57.forEach(function(num) {
+              sum += num;
+          });
+          Q57sr=sum/Q57.length
+
+          var sum = 0;
+          Q522.forEach(function(num) {
+              sum += num;
+          });
+          Q522sr=sum/Q522.length
+
+          var sum = 0;
+          Q533.forEach(function(num) {
+              sum += num;
+          });
+          Q533sr=sum/Q533.length
+
+          var sum = 0;
+          Q544.forEach(function(num) {
+              sum += num;
+          });
+          Q544sr=sum/Q544.length
+
+          var sum = 0;
+          Q555.forEach(function(num) {
+              sum += num;
+          });
+          Q555sr=sum/Q555.length
+
+          var sum = 0;
+          Q566.forEach(function(num) {
+              sum += num;
+          });
+          Q566sr=sum/Q566.length
+
+          var sum = 0;
+          Q577.forEach(function(num) {
+              sum += num;
+          });
+          Q577sr=sum/Q577.length
+            
+        QQ1.push(Q57sr);
+        QQ2.push(Q577sr);
+            
+        QQ1.push(Q56sr);
+        QQ2.push(Q566sr);
+
+        QQ1.push(Q55sr);
+        QQ2.push(Q555sr);
+
+        QQ1.push(Q54sr);
+        QQ2.push(Q544sr);
+
+        QQ1.push(Q53sr);
+        QQ2.push(Q533sr);
+
+        QQ1.push(Q52sr);
+        QQ2.push(Q522sr);
+
+        QQ1.push(Q51sr);
+        QQ2.push(Q511sr);
+
+        QQ1.slice(-5, -1)
+        QQ2.slice(-5, -1)   
+        document.getElementById("result9").innerHTML = QQ1.slice(-7);
+        document.getElementById("result10").innerHTML = QQ2.slice(-7);
           t2c.push(t2);
           Qc.push(Q);
-          
-
-          
+                   
 	    }
         for (tnn=tn; tnn < 21; tnn++) {
   // Запускается расчет
@@ -315,7 +466,6 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
           td2.textContent = t1.toFixed(2);
           td3.textContent = t2.toFixed(2);
           td4.textContent = Q.toFixed(2);
-
             
           row.append(td1, td2,td3, td4);
           document.getElementById("z").appendChild(row);  
@@ -323,17 +473,16 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
 
 	    // отправляем результат на страницу
              
-        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx1 = document.getElementById('myChart1').getContext('2d');
           
-        var myChart = new Chart(ctx, {
+        var myChart1 = new Chart(ctx1, {
           
-
           data: {
             labels: tnfactnew,
             datasets: [
               {
                 type: 'line',   
-                label: 'Температура сетевой воды в подающем трубопроводе',
+                label: 'Оптимальная температура сетевой воды в подающей линии',
                 data: t1c,
                 backgroundColor: 'rgba(255, 0, 0, 0.2)',
                 borderColor: 'rgba(255, 0, 0, 1)',
@@ -341,7 +490,7 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
               },
               {
                 type: 'line',
-                label: 'Температура сетевой воды в обратном трубопроводе',
+                label: 'Оптимальная температура сетевой воды в обратной линии',
                 data: t2c,
                 backgroundColor: 'rgba(0, 0, 255, 0.2)',
                 borderColor: 'rgba(0, 0, 255, 1)',
@@ -349,7 +498,7 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
               },
               {
                 type: 'scatter',   
-                label: 'Фактическая температура сетевой воды в подающем трубопроводе',
+                label: 'Фактическая температура сетевой воды в подающей линии',
                 data: t1factnew,
                 backgroundColor: 'rgba(255, 0, 0, 0.2)',
                 borderColor: 'rgba(255, 0, 0, 1)',
@@ -357,7 +506,7 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
               },
               {
                 type: 'scatter',
-                label: 'Фактическая температура сетевой воды в обратном трубопроводе',
+                label: 'Фактическая температура сетевой воды в обратной линии',
                 data: t2factnew,
                 backgroundColor: 'rgba(0, 0, 255, 0.2)',
                 borderColor: 'rgba(0, 0, 255, 1)',
@@ -381,13 +530,50 @@ document.getElementById('regform2').innerHTML='<canvas id="myChart" "></canvas>'
           ],
         },
       },
-
-      
+    
     }); 
 
+        var ctx = document.getElementById('myChart').getContext('2d');      
+        var myChart = new Chart(ctx, {
+          
+          data: {
+            labels: [-22,-18,-13,-8,-3,3,11],
+            datasets: [
+              {
+                type: 'line',   
+                label: 'Фактическая относительная нагрузка',
+                data: QQ1.slice(-7),
+                backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                borderColor: 'rgba(255, 0, 0, 1)',
+                borderWidth: 0.5,
+              },
+              {
+                type: 'line',
+                label: 'Оптимальная относительная нагрузка',
+                data: QQ2.slice(-7),
+                backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                borderColor: 'rgba(0, 0, 255, 1)',
+                borderWidth: 0.5,
+              },
+            ],
+          },
+      options: {
+        animation: {
+          duration: 2000,
+          easing: 'easeInOutBounce',
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },      
+    });             
 	}
-
     </script>
-
 </body>
 </html>
