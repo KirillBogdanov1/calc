@@ -53,7 +53,7 @@ def translate_english(event):
                 continue
             else:
                 tnob.append(tn[k])
-                t1factnew.append(0)
+                t1factnew.append(100)
                 t2factnew.append(0)
 
     print(len(t1factnew))             
